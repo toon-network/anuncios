@@ -1,0 +1,65 @@
+<script type = "text/javascript">
+var anuncios = [
+ "xK4lEgiCZbA",
+	"4Aa9JSeMe_U",
+	"RpO7T7J_7SA",
+	"VFTeqgdQW0k",
+	"2IhCIL29DFo",
+	"47F7B11OMQk",
+	"tfNh7ye6FmI",
+	"bvaGxYFjYnY",
+	"JD_UCXhrHoQ",
+	"fyomEulKCJs",
+	"nqIMfIjXxb4",
+	"KPib6kGJ20o",
+	"wLTuqXadX2I",
+	"rE0wxXQM5yg",
+	"CX__LzyFhfs",
+	"07Bektt9_wM",
+	"hgcrAX5NYfo",
+	"y5wopenkCro",
+	"Wmc1Z0S1_6Q",
+	"ii9oFJ7UfbY",
+	"pHw2jAxVUNE"
+];
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+var player;
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('player', {
+    height: '360',
+    width: '640',
+    videoId: anuncios[getRandomInt(anuncios.length)],
+    events: {
+      'onReady': onPlayerReady
+      //'onStateChange': onPlayerStateChange
+    }
+  });
+}
+
+function onPlayerReady(event) {
+        event.target.playVideo();
+      }
+
+      // 5. The API calls this function when the player's state changes.
+      //    The function indicates that when playing a video (state=1),
+      //    the player should play for six seconds and then stop.
+      var done = false;
+      function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+          setTimeout(stopVideo, 6000);
+          done = true;
+        }
+      }
+      function stopVideo() {
+        player.stopVideo();
+      }
+</script>
+<div id="player"></div>
